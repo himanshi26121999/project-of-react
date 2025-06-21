@@ -1,3 +1,4 @@
+import React from "react";
 import ExpenseItem from "./ExpenseItem";
 import Card from "../WrapperDiv/Card"
 function Expenses(props){
