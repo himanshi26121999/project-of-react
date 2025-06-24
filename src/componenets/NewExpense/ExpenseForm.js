@@ -1,7 +1,7 @@
 import React, {useState}from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm=()=>{
+const ExpenseForm=(props)=>{
     const[enteredTitle,setEnteredTitle]=useState("");
     const[enteredamount,setEnteredAmount]=useState("");
     const[enteredDate,setEnteredDate]=useState("");
@@ -20,29 +20,30 @@ const ExpenseForm=()=>{
     };
 
     const formSubmitEvent=(event)=>{
-        event.preventDafault();
-        const expenseDate={
+        event.preventDefault();
+        const expenseData={
             title:enteredTitle,
             amount:enteredamount,
             date:new Date(enteredDate)
         };
-        console.log(expenseDate);
+        console.log(expenseData);
+        props.onSubmitNewExpense(expenseData);
         setEnteredAmount("");setEnteredDate("");setEnteredTitle("");
     }
 return(
  <form onSubmit={formSubmitEvent}>
     <div className="new-expense__controls">
       <div className="new-expense__control">
-        <label>Title</label>
-        <input type="text"value={enteredTitle}id="title"onChange={titleChangeHandler}/>
+        <label htmlFor="inputTitle">Title</label>
+        <input type="text" id="inputTitle"value={enteredTitle}onChange={titleChangeHandler}/>
       </div>
       <div className="new-expense__control">
-        <lebel>Amount</lebel>
-        <input type="number" value={enteredamount}id="amount"onChange={amountChangeHandler}/>
+        <label htmlFor="inputAmount">Amount</label>
+        <input type="number" value={enteredamount}id="inputAmount"onChange={amountChangeHandler}/>
       </div>
      <div className="new-expense__control">
-        <label>Date</label>
-        <input type="date" value={enteredDate}id="date"min="2023-01-01"max="2024-12-31" onChange={dateChangeHandler}/>
+        <label htmlFor="inputDate">Date</label>
+        <input type="date" value={enteredDate}id="inputDate"min="2023-01-01"max="2024-12-31" onChange={dateChangeHandler}/>
      </div>
      <div className="new-expense__actions">
         <button type="submit">Submit</button>
