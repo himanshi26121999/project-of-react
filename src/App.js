@@ -1,22 +1,30 @@
-import Expenses from "./componenets/ExpenseDiv/Expenses"
-import NewExpense from "./componenets/NewExpense/NewExpense";
-function App() {
-  const expenses=[
-    {id:"1",date:new Date(2023,7,15),titel:"Insurance",location:"Delhi",price:"100"},
-    {id:"2",date:new Date(2023,8,25),titel:"Book",location:"Goa",price:"200"},
-  {id:"3",date:new Date(2023,9,5),titel:"Spoon",location:"Hyderabad",price:"10"},
-  {id:"4",date:new Date(2023,10,11),titel:"Food",location:"Bangalore",price:"110"},
-  {id:"5",date:new Date(2023,11,15),titel:"Mango",location:"Koichi",price:"900"},
-  ];
-  const addExpenseDataHandler=(expense)=>{
-  console.log(expense);
-  }
-  return (
-    <div>
-      <NewExpense onAddExpense={addExpenseDataHandler}/>
-      <Expenses expenses={expenses}/>
-    </div>
-  );
-}
+import React,{useState} from "react";  
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
+const App = () => {
+  const[expenses,setExpenses]=useState([
+    {id:1,date:new Date(2023,11,12),title:"Insurance",amount:100},
+    {id:2,date:new Date(2024,11,13),title:"Book",amount:10},
+    {id:3,date:new Date(2023,9,9),title:"Pen",amount:1},
+    {id:4,date:new Date(2025,11,14),title:"Laptop",amount:200},
+   ]);
+
+   const saveUserInputHandaler=(expenseData)=>{
+     console.log(expenseData);
+     setExpenses((preExpenses)=>{
+       return[
+        expenseData,...preExpenses
+       ]
+     })
+   }
+return(
+  <>
+    <p>lets started react project</p>
+    <NewExpense onSaveUserInput={saveUserInputHandaler}/>
+    <Expenses expenses={expenses}/>
+    </>
+    )
+  }
 export default App;
+
